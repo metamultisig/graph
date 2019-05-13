@@ -1,0 +1,32 @@
+type Keyholder @entity {
+  #ID = multisig address + keyholder address
+  id: ID!
+  address: Bytes! # address
+  multisig: Bytes! # address
+  weight: BigInt! # uint256
+}
+
+#type Multisig @entity {
+#  id: ID!
+#  address: Bytes! # address
+#  threshold: BigInt! # uint256
+#  keyholders: [Keyholder!]
+#}
+
+type Transaction @entity {
+  id: ID!
+  multisig: Bytes! # address
+  destination: Bytes! # address
+  value: BigInt! # uint256
+  data: Bytes! # bytes
+  nonce: BigInt! # uint256
+  returndata: Bytes! # bytes
+  signatories: [Bytes!]! # address[]
+}
+
+#
+#type Deposit @entity {
+#  id: ID!
+#  sender: Bytes! # address
+#  value: BigInt! # uint256
+#}

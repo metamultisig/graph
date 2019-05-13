@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: ropsten
+    source:
+#      address: "0x3f2098DD40A6b20d2b5cBC59Eb32BBeF8C07B322"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+#        - Multisig
+        - Keyholder
+        - Transaction
+#        - Deposit
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: KeyholderChanged(address,uint256)
+          handler: handleKeyholderChanged
+#        - event: ThresholdChanged(uint256)
+#          handler: handleThresholdChanged
+        - event: Transaction(address,uint256,bytes,uint256,bytes,address[])
+          handler: handleTransaction
+#        - event: Deposit(address,uint256)
+#          handler: handleDeposit
+      file: ./src/mapping.ts
